@@ -45,10 +45,7 @@ body {
     width: 490px;
     grid-template-columns: repeat(3, 150px);
     grid-template-rows: 50px repeat(3, 150px) 60px;
-<<<<<<< HEAD
     gap: 10px;
-=======
->>>>>>> 0b48b4129a7fe8b51550069ef5e9df59c869d4a1
   }
 }
 
