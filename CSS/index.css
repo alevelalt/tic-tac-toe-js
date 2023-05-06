@@ -93,11 +93,33 @@ body {
 }
 
 .square {
-  background-color: red;
+  background-color: var(--gray);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
+.square:hover {
+  cursor: pointer;
+  opacity: 80%;
 }
 
 .score {
-  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.score p {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.score span {
+  font-size: 13px;
+  margin-top: 4px;
 }
 
 .action {
@@ -119,6 +141,7 @@ body {
   color: white;
   background-color: rgba(211, 211, 211, 0.05);
   border: 1px solid transparent;
+  font-size: 12px;
 }
 
 .items {
