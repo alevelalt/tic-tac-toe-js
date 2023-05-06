@@ -47,9 +47,37 @@ body {
 }
 
 .turn {
-  background-color: green;
   grid-column-start: 1;
   grid-column-end: 3;
+  align-self: center;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  color: var(--yellow);
+}
+
+.turn p {
+  font-size: 14px;
+}
+
+.turn i {
+  margin-left: 10px;
+  font-size: 1.8rem;
+  animation: 0.6s ease-in-out turn-icon-animation;
+}
+
+@keyframes turn-icon-animation {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .square {
