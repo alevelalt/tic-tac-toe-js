@@ -23,11 +23,25 @@ body {
   background-color: var(--dark-gray);
 }
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: 50px repeat(3, 80px) 60px;
   gap: 5px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    width: 490px;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: 50px repeat(3, 150px) 60px;
+  }
 }
 
 .turn {
