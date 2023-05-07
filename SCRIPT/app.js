@@ -1,6 +1,10 @@
-const actionMenu = document.querySelector(".menu");
-const menuItems = actionMenu.querySelector(".items");
+const App = {
+  $: {
+    actionMenu: document.querySelector(".menu"),
+    menuItems: document.querySelector(".items"),
+  },
+};
 
-actionMenu.addEventListener("click", () => {
-  menuItems.classList.toggle("hidden");
+App.$.actionMenu.addEventListener("click", () => {
+  App.$.menuItems.classList.toggle("hidden");
 });
