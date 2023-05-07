@@ -1,7 +1,9 @@
 const App = {
   $: {
     actionMenu: document.querySelector(".menu"),
-    menuItems: document.querySelector(".items"),
+    menuItems: document.querySelector("[data-id='menu-items']"),
+    resetBtn: document.querySelector("[data-id='reset-btn']"),
+    newRoundBtn: document.querySelector("[data-id='new-round-btn']"),
   },
 
   init() {
