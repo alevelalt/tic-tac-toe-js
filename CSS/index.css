@@ -186,3 +186,35 @@ body {
 .border {
   border: 1px solid rgba(211, 211, 211, 0.4) !important;
 }
+
+.modal {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-contents {
+  height: 150px;
+  width: 100%;
+  max-width: 250px;
+  background-color: #2e4756;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  margin: 10px;
+  color: white;
+}
+
+.modal-contents button {
+  padding: 10px;
+  background-color: var(--turquoise);
+  color: #203139;
+  border-radius: 4px;
+}
