@@ -8,6 +8,10 @@ const App = {
   },
 
   init() {
+    App.allEventListeners();
+  },
+
+  allEventListeners() {
     App.$.actionMenu.addEventListener("click", () => {
       App.$.menuItems.classList.toggle("hidden");
     });
