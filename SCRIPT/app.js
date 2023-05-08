@@ -5,6 +5,12 @@ const App = {
     resetBtn: document.querySelector("[data-id='reset-btn']"),
     newRoundBtn: document.querySelector("[data-id='new-round-btn']"),
     gameSquares: document.querySelectorAll("[data-id='main-game-squares']"),
+    yourTurn: document.getElementById("your-turn"),
+    turnIcon: document.getElementById("turn-icon"),
+  },
+
+  state: {
+    currentPlayer: "player 1",
   },
 
   init() {
@@ -12,6 +18,7 @@ const App = {
   },
 
   allEventListeners() {
+    // Hide/unhide Action dropdown menu
     App.$.actionMenu.addEventListener("click", () => {
       App.$.menuItems.classList.toggle("hidden");
     });
@@ -26,7 +33,33 @@ const App = {
 
     App.$.gameSquares.forEach((element) => {
       element.addEventListener("click", (event) => {
-        console.log(`Square with ID: ${event.target.id} was clicked`);
+        // If square already has a move, return early
+        if (element.hasChildNodes()) {
+          return;
+        }
+
+        const icon = document.createElement("i");
+
+        //  Determine which icon to add in square
+        if (this.state.currentPlayer === "player 1") {
+          icon.classList.add("fa-solid", "fa-x", "color-turquoise");
+          this.state.currentPlayer = "player 2";
+          App.$.yourTurn.innerText = "Player 2, your turn!";
+          App.$.yourTurn.classList.toggle("color-yellow");
+          App.$.yourTurn.classList.toggle("color-turquoise");
+          App.$.turnIcon.classList.replace("fa-x", "fa-o");
+          App.$.turnIcon.classList.replace("color-turquoise", "color-yellow");
+        } else {
+          icon.classList.add("fa-solid", "fa-o", "color-yellow");
+          this.state.currentPlayer = "player 1";
+          App.$.yourTurn.innerText = "Player 1, your turn!";
+          App.$.yourTurn.classList.toggle("color-yellow");
+          App.$.yourTurn.classList.toggle("color-turquoise");
+          App.$.turnIcon.classList.replace("fa-o", "fa-x");
+          App.$.turnIcon.classList.replace("color-yellow", "color-turquoise");
+        }
+
+        event.target.replaceChildren(icon);
       });
     });
   },
