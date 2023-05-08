@@ -10,7 +10,7 @@ const App = {
   },
 
   state: {
-    currentPlayer: "player 1",
+    currentPlayer: 1,
   },
 
   init() {
@@ -41,9 +41,9 @@ const App = {
         const icon = document.createElement("i");
 
         //  Determine which icon to add in square
-        if (this.state.currentPlayer === "player 1") {
+        if (this.state.currentPlayer === 1) {
           icon.classList.add("fa-solid", "fa-x", "color-turquoise");
-          this.state.currentPlayer = "player 2";
+          this.state.currentPlayer = 2;
           App.$.yourTurn.innerText = "Player 2, your turn!";
           App.$.yourTurn.classList.toggle("color-yellow");
           App.$.yourTurn.classList.toggle("color-turquoise");
@@ -51,7 +51,7 @@ const App = {
           App.$.turnIcon.classList.replace("color-turquoise", "color-yellow");
         } else {
           icon.classList.add("fa-solid", "fa-o", "color-yellow");
-          this.state.currentPlayer = "player 1";
+          this.state.currentPlayer = 1;
           App.$.yourTurn.innerText = "Player 1, your turn!";
           App.$.yourTurn.classList.toggle("color-yellow");
           App.$.yourTurn.classList.toggle("color-turquoise");
