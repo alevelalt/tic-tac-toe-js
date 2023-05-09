@@ -11,6 +11,48 @@ const App = {
 
   state: {
     currentPlayer: 1,
+    gameMoves: [],
+  },
+
+  getGameStatus(moves) {
+    const player1Moves = moves
+      .filter((obj) => obj.playerId === 1)
+      .map((obj) => +obj.squareId);
+
+    const player2Moves = moves
+      .filter((obj) => obj.playerId === 2)
+      .map((obj) => +obj.squareId);
+
+    const winningPatterns = [
+      [1, 2, 3],
+      [1, 5, 9],
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 5, 7],
+      [3, 6, 9],
+      [4, 5, 6],
+      [7, 8, 9],
+    ];
+
+    let winner = null;
+
+    winningPatterns.forEach((pattern) => {
+      const player1Wins = pattern.every((squareid) =>
+        player1Moves.includes(squareid)
+      );
+      const player2Wins = pattern.every((squareid) =>
+        player2Moves.includes(squareid)
+      );
+
+      if (player1Wins) winner = 1;
+      if (player2Wins) winner = 2;
+    });
+
+    return {
+      status:
+        moves.length === 9 || winner !== null ? "complete" : "in-progress",
+      gameWinner: winner,
+    };
   },
 
   init() {
@@ -43,6 +85,11 @@ const App = {
         //  Determine which icon to add in square
         if (this.state.currentPlayer === 1) {
           icon.classList.add("fa-solid", "fa-x", "color-turquoise");
+          App.state.gameMoves.push({
+            squareId: +element.id,
+            playerId: App.state.currentPlayer,
+          });
+
           this.state.currentPlayer = 2;
           App.$.yourTurn.innerText = "Player 2, your turn!";
           App.$.yourTurn.classList.toggle("color-yellow");
@@ -51,6 +98,10 @@ const App = {
           App.$.turnIcon.classList.replace("color-turquoise", "color-yellow");
         } else {
           icon.classList.add("fa-solid", "fa-o", "color-yellow");
+          App.state.gameMoves.push({
+            squareId: +element.id,
+            playerId: App.state.currentPlayer,
+          });
           this.state.currentPlayer = 1;
           App.$.yourTurn.innerText = "Player 1, your turn!";
           App.$.yourTurn.classList.toggle("color-yellow");
@@ -60,6 +111,22 @@ const App = {
         }
 
         event.target.replaceChildren(icon);
+
+        // check if there is a winner or is it a tie
+
+        const gameStatus = this.getGameStatus(App.state.gameMoves);
+
+        if (gameStatus.gameWinner === 1) {
+          console.log("Player 1 won");
+        }
+        if (gameStatus.gameWinner === 2) {
+          console.log("Player 2 won");
+        }
+        if (gameStatus.status === "complete") {
+          if (gameStatus.gameWinner === null) {
+            console.log("it's a tie.");
+          }
+        }
       });
     });
   },
