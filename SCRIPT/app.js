@@ -76,6 +76,16 @@ const App = {
       console.log("Go to new round.");
     });
 
+    // endgame modal play again button
+    this.$.modalBtn.addEventListener("click", () => {
+      this.$.modalToggle.classList.add("hidden");
+      this.$.gameSquares.forEach((sqr) => {
+        sqr.replaceChildren();
+      });
+      this.state.gameMoves = [];
+      this.state.currentPlayer = 1;
+    });
+
     App.$.gameSquares.forEach((element) => {
       element.addEventListener("click", (event) => {
         // If square already has a move, return early
