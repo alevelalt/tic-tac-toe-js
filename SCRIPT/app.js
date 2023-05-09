@@ -7,6 +7,9 @@ const App = {
     gameSquares: document.querySelectorAll("[data-id='main-game-squares']"),
     yourTurn: document.getElementById("your-turn"),
     turnIcon: document.getElementById("turn-icon"),
+    modalToggle: document.getElementById("unhide-modal"),
+    modalText: document.getElementById("modal-text"),
+    modalBtn: document.getElementById("modal-btn"),
   },
 
   state: {
@@ -117,14 +120,17 @@ const App = {
         const gameStatus = this.getGameStatus(App.state.gameMoves);
 
         if (gameStatus.gameWinner === 1) {
-          console.log("Player 1 won");
+          this.$.modalToggle.classList.remove("hidden");
+          this.$.modalText.innerText = "Player 1 won.";
         }
         if (gameStatus.gameWinner === 2) {
-          console.log("Player 2 won");
+          this.$.modalToggle.classList.remove("hidden");
+          this.$.modalText.innerText = "Player 2 won.";
         }
         if (gameStatus.status === "complete") {
           if (gameStatus.gameWinner === null) {
-            console.log("it's a tie.");
+            this.$.modalToggle.classList.remove("hidden");
+            this.$.modalText.innerText = "it's a tie.";
           }
         }
       });
