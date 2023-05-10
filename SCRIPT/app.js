@@ -84,6 +84,13 @@ const App = {
       });
       this.state.gameMoves = [];
       this.state.currentPlayer = 1;
+
+      // re-render player turns
+      App.$.yourTurn.innerText = "Player 1, your turn!";
+      App.$.yourTurn.className = "color-turquoise";
+      App.$.turnIcon.className = "fa-solid";
+      App.$.turnIcon.classList.add("fa-x");
+      App.$.turnIcon.classList.add("color-turquoise");
     });
 
     App.$.gameSquares.forEach((element) => {
