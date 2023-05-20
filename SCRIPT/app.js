@@ -82,11 +82,22 @@ const App = {
     });
 
     App.$.resetBtn.addEventListener("click", () => {
-      console.log("Reset Game.");
+      this.$.gameSquares.forEach((sqr) => {
+        sqr.replaceChildren();
+      });
+      this.state.gameMoves = [];
+      this.state.currentPlayer = 1;
+      this.$.player1ScoreSpan.innerText = `${0} wins`;
+      this.$.player2ScoreSpan.innerText = `${0} wins`;
+      this.$.tiesSpan.innerText = 0;
     });
 
     App.$.newRoundBtn.addEventListener("click", () => {
-      console.log("Go to new round.");
+      this.$.gameSquares.forEach((sqr) => {
+        sqr.replaceChildren();
+      });
+      this.state.gameMoves = [];
+      this.state.currentPlayer = 1;
     });
 
     // endgame modal play again button
