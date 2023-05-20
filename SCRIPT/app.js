@@ -90,6 +90,13 @@ const App = {
       this.$.player1ScoreSpan.innerText = `${0} wins`;
       this.$.player2ScoreSpan.innerText = `${0} wins`;
       this.$.tiesSpan.innerText = 0;
+
+      this.state.currentPlayer = 1;
+      App.$.yourTurn.innerText = "Player 1, your turn!";
+      App.$.yourTurn.classList.toggle("color-yellow");
+      App.$.yourTurn.classList.toggle("color-turquoise");
+      App.$.turnIcon.classList.replace("fa-o", "fa-x");
+      App.$.turnIcon.classList.replace("color-yellow", "color-turquoise");
     });
 
     App.$.newRoundBtn.addEventListener("click", () => {
@@ -98,6 +105,13 @@ const App = {
       });
       this.state.gameMoves = [];
       this.state.currentPlayer = 1;
+
+      this.state.currentPlayer = 1;
+      App.$.yourTurn.innerText = "Player 1, your turn!";
+      App.$.yourTurn.classList.toggle("color-yellow");
+      App.$.yourTurn.classList.toggle("color-turquoise");
+      App.$.turnIcon.classList.replace("fa-o", "fa-x");
+      App.$.turnIcon.classList.replace("color-yellow", "color-turquoise");
     });
 
     // endgame modal play again button
