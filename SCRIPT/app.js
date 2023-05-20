@@ -10,6 +10,9 @@ const App = {
     modalToggle: document.getElementById("unhide-modal"),
     modalText: document.getElementById("modal-text"),
     modalBtn: document.getElementById("modal-btn"),
+    player1ScoreSpan: document.getElementById("player-one-score"),
+    player2ScoreSpan: document.getElementById("player-two-score"),
+    tiesSpan: document.getElementById("ties"),
   },
 
   state: {
@@ -25,6 +28,9 @@ const App = {
     const player2Moves = moves
       .filter((obj) => obj.playerId === 2)
       .map((obj) => +obj.squareId);
+
+    let player1Score = Number(parseInt(this.$.player1ScoreSpan.innerText, 10));
+    let player2Score = Number(parseInt(this.$.player2ScoreSpan.innerText, 10));
 
     const winningPatterns = [
       [1, 2, 3],
@@ -47,14 +53,21 @@ const App = {
         player2Moves.includes(squareid)
       );
 
-      if (player1Wins) winner = 1;
-      if (player2Wins) winner = 2;
+      if (player1Wins) {
+        winner = 1;
+        player1Score += 1;
+      }
+      if (player2Wins) {
+        winner = 2;
+        player2Score += 1;
+      }
     });
 
     return {
-      status:
-        moves.length === 9 || winner !== null ? "complete" : "in-progress",
+      status: moves.length === 9 ? "complete" : "in-progress",
       gameWinner: winner,
+      player1Score: player1Score,
+      player2Score: player2Score,
     };
   },
 
@@ -139,16 +152,19 @@ const App = {
         if (gameStatus.gameWinner === 1) {
           this.$.modalToggle.classList.remove("hidden");
           this.$.modalText.innerText = "Player 1 won.";
-        }
-        if (gameStatus.gameWinner === 2) {
+          this.$.player1ScoreSpan.innerText = `${gameStatus.player1Score} wins`;
+        } else if (gameStatus.gameWinner === 2) {
           this.$.modalToggle.classList.remove("hidden");
           this.$.modalText.innerText = "Player 2 won.";
-        }
-        if (gameStatus.status === "complete") {
-          if (gameStatus.gameWinner === null) {
-            this.$.modalToggle.classList.remove("hidden");
-            this.$.modalText.innerText = "it's a tie.";
-          }
+          this.$.player2ScoreSpan.innerText = `${gameStatus.player2Score} wins`;
+        } else if (gameStatus.status === "complete") {
+          this.$.modalToggle.classList.remove("hidden");
+          this.$.modalText.innerText = "it's a tie.";
+
+          let ties = Number(this.$.tiesSpan.innerText);
+
+          ties += 1;
+          this.$.tiesSpan.innerText = ties;
         }
       });
     });
